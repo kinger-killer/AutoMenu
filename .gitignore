@@ -15,6 +15,7 @@
 
 # Visual Studio user and IDE files
 /.vs/
+**/.vs/
 *.user
 *.suo
 *.VC.db

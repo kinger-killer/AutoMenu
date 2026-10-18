@@ -25,4 +25,4 @@ ToggleSwitchData data(
     sf::milliseconds(220), 0.8f);
 ```
 
-Each track texture is stretched to the control bounds. The knob texture is scaled to a square based on the track height and `knobScale`, then moves along the track. Leave any texture pointer `nullptr` to use the built-in shape for that part.
+Both track textures are required to use custom track artwork; if either is `nullptr`, the built-in colored track is used. The knob texture is independent: set it to `nullptr` to use the built-in circle. Track textures are stretched to the control bounds. The knob texture is scaled to a square based on the track height and `knobScale`, then moves along the track.

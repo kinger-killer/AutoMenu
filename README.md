@@ -14,7 +14,7 @@ include(FetchContent)
 FetchContent_Declare(
     AutoMenu
     GIT_REPOSITORY https://github.com/kinger-killer/AutoMenu.git
-    GIT_TAG 1.0.0
+    GIT_TAG main
 )
 FetchContent_MakeAvailable(AutoMenu)
 
@@ -38,7 +38,7 @@ Each component has its own reference page:
 - [DropdownList](docs/DropdownList.md) — expandable list of options.
 - [ToggleSwitch](docs/ToggleSwitch.md) — on/off control.
 - [CheckBox](docs/CheckBox.md) — labeled boolean control.
-- [TextInput](docs/TextInput.md) — basic single-line text input.
+- [TextInput](docs/TextInput.md) — single-line text input with caret editing.
 - [UI](docs/UI.md) — widget ownership, updates, and render ordering.
 
 ## Typical use

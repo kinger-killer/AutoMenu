@@ -27,12 +27,12 @@ while (const auto event = window.pollEvent())
     ui.update(*event, window, sf::Time::Zero);
 }
 
-// Apply elapsed frame time once for time-based widgets such as Bar.
+// Apply elapsed frame time once for animations and blinking cursors.
 ui.update(sf::Event{sf::Event::FocusGained{}}, window, frameTime);
 
 ui.render(window);
 ```
 
-Passing zero during event dispatch prevents time-based widgets from advancing once for every queued event. The extra focus-gained event provides one time update per frame; current input widgets ignore it.
+Passing zero during event dispatch prevents animations from advancing once for every queued event. The extra focus-gained event provides one time update per frame; widgets use its elapsed time for effects such as the `Bar` and `ToggleSwitch` animations and the `TextInput` caret blink. These widgets ignore the event itself.
 
 `UI` does not own fonts, textures, or game state referenced by widgets. Keep those resources alive until the widgets that use them are destroyed.

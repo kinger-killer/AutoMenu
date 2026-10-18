@@ -1,6 +1,6 @@
 # RadioButton
 
-`RadioButton<Value>` derives from `CheckBox` and reuses its label, hover handling, and indicator rendering. Its indicator uses the radio style. Radio buttons are grouped by sharing the same selected-value variable. Clicking one assigns its option value to that variable, which selects it and clears the visual selection from buttons with other option values. The click and selection behavior is implemented by `RadioButton`; the base class does not need extra virtual hooks.
+`RadioButton<Value>` derives from `CheckBox` and reuses its label, hover handling, and indicator rendering. Its indicator uses the radio style. Radio buttons are grouped by sharing the same selected-value variable. Clicking one assigns its option value to that variable, which selects it and clears the visual selection from buttons with other option values.
 
 ## Create a group with a factory
 
