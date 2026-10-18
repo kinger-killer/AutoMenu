@@ -1,0 +1,31 @@
+# CMake build output
+/Tests/
+/build/
+/build-*/
+/cmake-build-*/
+/out/
+**/build/
+**/out/
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/Makefile
+/build.ninja
+/_deps/
+
+# Visual Studio user and IDE files
+/.vs/
+*.user
+*.suo
+*.VC.db
+*.VC.VC.opendb
+
+# Compiled artifacts
+*.obj
+*.o
+*.exe
+*.dll
+*.lib
+*.pdb
+*.ilk
+*.exp
