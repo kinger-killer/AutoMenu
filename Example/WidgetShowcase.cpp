@@ -2,7 +2,6 @@
 
 #include <algorithm>
 #include <memory>
-#include <string>
 #include <utility>
 
 #include "../src/Widgets/Bar.hpp"
@@ -38,12 +37,11 @@ namespace
 	Label* addHealthAndVolumeControls(UI& ui, const ExampleAssets& assets, ExampleState& state)
 	{
 		addLabel(ui, assets.font, "HP (Space: -10, R: reset)", { 70.f, 145.f }, 22);
-
-		const BarData<float> healthData(
+		const BarData<float> healthBarData(
 			sf::FloatRect({ 70.f, 185.f }, { 460.f, 28.f }), state.health, state.maxHealth,
-			sf::Color(70, 70, 70), sf::Color(70, 200, 100), sf::Color::White, 2.f);
-		BarFactory<float> barFactory;
-		ui.addWidget(barFactory.create(healthData));
+			sf::Color(70, 70, 70), sf::Color(70, 200, 100), sf::Color::White, 2.f, 0, 0.5f);
+		BarFactory<float> healthBarFactory;
+		ui.addWidget(healthBarFactory.create(healthBarData));
 
 		Label* volumeLabel = addLabel(ui, assets.font, "Volume: 50%", { 70.f, 445.f }, 22);
 		const SliderData<float> volumeData(
@@ -191,7 +189,7 @@ void handleGameInput(const sf::Event& event, ExampleState& state)
 		return;
 
 	if (key->code == sf::Keyboard::Key::Space)
-		state.health = std::max(0.f, state.health - 10.f);
+		*state.health = std::max(0.f, *state.health - 10.f);
 	else if (key->code == sf::Keyboard::Key::R)
-		state.health = state.maxHealth;
+		*state.health = *state.maxHealth;
 }

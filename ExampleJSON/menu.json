@@ -1,0 +1,72 @@
+{
+  "widgets": [
+    { "type": "label", "text": "AutoMenu Widget Showcase", "position": [70, 28], "characterSize": 30, "font": "asset.font" },
+    { "type": "label", "text": "Health and controls", "position": [70, 95], "characterSize": 24, "font": "asset.font" },
+    { "type": "label", "text": "Settings", "position": [620, 95], "characterSize": 24, "font": "asset.font" },
+    { "type": "label", "text": "HP (Space: -10, R: reset)", "position": [70, 145], "characterSize": 22, "font": "asset.font" },
+    {
+      "type": "bar", "position": [70, 185], "size": [460, 28],
+      "value": "player.health", "maximum": "player.max_health",
+      "background": [70, 70, 70, 255], "fill": [70, 200, 100, 255],
+      "outline": [255, 255, 255, 255], "outlineThickness": 2,
+      "renderLayer": 0, "animationSpeed": 0.5
+    },
+    {
+      "type": "label_button", "position": [70, 270], "size": [260, 100],
+      "fill": [80, 100, 160, 255], "outline": [255, 255, 255, 255],
+      "outlineThickness": 3, "renderLayer": 0, "name": "LabelButton",
+      "text": "Text button", "characterSize": 30, "font": "asset.font"
+    },
+    {
+      "type": "sprite_button", "position": [390, 260], "size": [120, 120],
+      "texture": "asset.icon", "name": "SpriteButton", "renderLayer": 1
+    },
+    { "type": "label", "id": "button_status", "text": "Move over or click a button", "position": [70, 390], "characterSize": 18, "font": "asset.font" },
+    { "type": "label", "id": "volume_status", "text": "Volume: 50%", "position": [70, 445], "characterSize": 22, "font": "asset.font" },
+    {
+      "type": "slider", "position": [70, 485], "size": [460, 32],
+      "value": "settings.volume", "minimum": 0, "maximum": 1,
+      "trackTexture": "asset.slider_track", "knobTexture": "asset.icon",
+      "trackColor": [70, 70, 70, 255], "knobColor": [100, 160, 240, 255]
+    },
+    { "type": "label", "text": "Quality", "position": [620, 145], "characterSize": 20, "font": "asset.font" },
+    {
+      "type": "radio_button", "position": [620, 180], "size": [260, 32],
+      "font": "asset.font", "text": "Low quality", "value": "settings.quality", "option": 0
+    },
+    {
+      "type": "radio_button", "position": [620, 222], "size": [260, 32],
+      "font": "asset.font", "text": "High quality", "value": "settings.quality", "option": 1
+    },
+    { "type": "label", "text": "Resolution", "position": [620, 294], "characterSize": 20, "font": "asset.font" },
+    {
+      "type": "dropdown_list", "position": [620, 330], "size": [300, 38],
+      "font": "asset.font", "value": "settings.resolution",
+      "options": ["800 x 600", "1280 x 720", "1920 x 1080"]
+    },
+    {
+      "type": "toggle_switch", "position": [620, 510], "size": [76, 36],
+      "value": "settings.fullscreen", "offTrackTexture": "asset.toggle_off",
+      "onTrackTexture": "asset.toggle_on", "knobTexture": "asset.toggle_knob",
+      "animationMilliseconds": 220, "knobScale": 0.78
+    },
+    { "type": "label", "text": "Fullscreen", "position": [715, 510], "characterSize": 22, "font": "asset.font" },
+    {
+      "type": "check_box", "position": [620, 570], "size": [300, 34],
+      "font": "asset.font", "text": "Subtitles", "value": "settings.subtitles"
+    },
+    {
+      "type": "check_box", "position": [620, 625], "size": [340, 34],
+      "font": "asset.font", "text": "Custom design", "value": "settings.custom_checkbox",
+      "indicatorTexture": "asset.triangle_indicator", "checkedMarkTexture": "asset.check_mark",
+      "outlineColor": [100, 220, 255, 255], "hoverColor": [255, 210, 80, 255],
+      "hoverFillColor": [25, 45, 60, 255], "checkedColor": [20, 80, 110, 255],
+      "uncheckedFillColor": [25, 45, 60, 255], "textColor": [180, 235, 255, 255],
+      "outlineThickness": 3, "indicatorSizeRatio": 0.9, "characterSize": 20
+    },
+    {
+      "type": "text_input", "position": [620, 690], "size": [380, 42],
+      "font": "asset.font", "value": "player.name", "placeholder": "Player name"
+    }
+  ]
+}

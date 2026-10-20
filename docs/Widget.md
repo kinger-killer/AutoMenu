@@ -38,3 +38,5 @@ public:
 ```
 
 Use `WidgetFactory<Product, Data>` as the common factory interface. See [UI](UI.md) for adding custom widgets to a UI.
+
+Widgets created by the optional JSON module keep their bound values, fonts, and textures alive through shared ownership. Widgets created directly with core C++ factories follow the lifetime rules documented on each widget's page.

@@ -7,6 +7,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include(FetchContent)
 
+option(AUTOMENU_BUILD_JSON "Build the optional AutoMenu JSON module" OFF)
+
 set(SFML_BUILD_AUDIO OFF CACHE BOOL "" FORCE)
 set(SFML_BUILD_NETWORK OFF CACHE BOOL "" FORCE)
 
@@ -18,7 +20,7 @@ FetchContent_Declare(SFML
     SYSTEM
 )
 
-FetchContent_MakeAvailable(SFML )
+FetchContent_MakeAvailable(SFML)
 
 add_library(AutoMenu INTERFACE)
 target_include_directories(AutoMenu INTERFACE
@@ -43,3 +45,7 @@ target_sources(AutoMenu INTERFACE
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/CheckBox.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/TextInput.hpp
 )
+
+if(AUTOMENU_BUILD_JSON)
+	add_subdirectory(modules/AutoMenuJson)
+endif()

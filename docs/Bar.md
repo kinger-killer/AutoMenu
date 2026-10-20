@@ -21,7 +21,20 @@ BarFactory<float> factory;
 auto bar = factory.create(data);
 ```
 
-The two values must outlive the bar. `BarData` retains references to them; the data object itself may be temporary after `create` returns.
+With this reference-based constructor, both values must outlive the bar. `BarData` retains references to them; the data object itself may be temporary after `create` returns. To share ownership with the bar, pass `std::shared_ptr` values instead:
+
+```cpp
+auto health = std::make_shared<float>(75.f);
+auto maxHealth = std::make_shared<const float>(100.f);
+
+BarData<float> data(
+    sf::FloatRect({120.f, 190.f}, {500.f, 24.f}),
+    health, maxHealth);
+```
+
+The bar keeps these shared values alive and reads their current contents during updates.
+
+The optional JSON module creates bars through the same `BarData` and `BarFactory` path. Its `value` and `maximum` fields name shared values registered in `ValueRegistry`; see [JSON module guide](JSON.md).
 
 The fill fraction is clamped to `[0, 1]`. A maximum at or below zero produces an empty bar. When the observed value changes, the displayed fill approaches the new fraction. Animation speed is measured in fractions of the full bar per second; `0.5f` traverses half the bar per second. Set it with `setAnimationSpeed` or through `BarData`.
 

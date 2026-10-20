@@ -9,8 +9,8 @@
 
 struct ExampleState
 {
-	float health = 75.f;
-	const float maxHealth = 100.f;
+	std::shared_ptr<float> health = std::make_shared<float>(75.f);
+	std::shared_ptr<const float> maxHealth = std::make_shared<const float>(100.f);
 	float volume = 0.5f;
 	int selectedQuality = 0;
 	std::size_t selectedResolution = 0;

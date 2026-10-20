@@ -2,6 +2,8 @@
 #include <memory>
 #include <optional>
 #include <string>
+#include <utility>
+#include <vector>
 #include <SFML/Graphics.hpp>
 
 #include "../Observer.hpp"
@@ -18,9 +20,18 @@ class Widget
 {
 private:
 	std::uint8_t renderLayer = 0;
+	std::vector<std::shared_ptr<const void>> retainedResources;
 
 public:
 	virtual ~Widget() = default;
+
+	// Keeps shared resources and runtime values alive while this widget uses them.
+	template <typename T>
+	void retainLifetime(std::shared_ptr<T> resource)
+	{
+		if (resource)
+			retainedResources.emplace_back(std::move(resource));
+	}
 	
 	virtual void setRenderLayer(std::uint8_t newLayer) { renderLayer = newLayer; }
 	virtual std::uint8_t getRenderLayer() const { return renderLayer; }
