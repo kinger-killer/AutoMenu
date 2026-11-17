@@ -7,6 +7,7 @@
 Factories return `std::unique_ptr` objects. Transfer ownership to the UI:
 
 ```cpp
+using namespace widgets;
 UI menu;
 ButtonFactory factory;
 auto playButton = factory.create(buttonData);
@@ -20,6 +21,7 @@ menu.addWidget(std::move(playButton));
 `update` accepts one SFML event and a `sf::Time` delta. Call it for each event so interactive widgets receive input. Call `render` during the draw part of each frame:
 
 ```cpp
+using namespace widgets;
 while (const auto event = window.pollEvent())
 {
     if (event->is<sf::Event::Closed>())

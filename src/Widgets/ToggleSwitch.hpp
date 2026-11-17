@@ -6,6 +6,8 @@
 
 #include "Widget.hpp"
 
+namespace widgets
+{
 class ToggleSwitch : public Widget
 {
 public:
@@ -204,3 +206,5 @@ public:
 		return toggle;
 	}
 };
+
+} // namespace widgets

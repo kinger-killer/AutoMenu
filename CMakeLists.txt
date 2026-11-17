@@ -31,6 +31,7 @@ target_link_libraries(AutoMenu INTERFACE
 )
 
 target_sources(AutoMenu INTERFACE
+	${CMAKE_CURRENT_SOURCE_DIR}/src/AutoMenu.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/UI.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/Widget.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/Button.hpp

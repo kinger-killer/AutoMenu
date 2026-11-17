@@ -7,6 +7,8 @@
 
 #include "Button.hpp"
 
+namespace widgets
+{
 class DropdownOptionButton : public Button
 {
 public:
@@ -267,3 +269,5 @@ public:
 		return dropdown;
 	}
 };
+
+} // namespace widgets

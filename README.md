@@ -4,6 +4,8 @@ AutoMenu is a header-only C++20 UI library for SFML 3. It provides widgets for g
 
 The core library and the JSON loader are separate CMake targets. Use only `AutoMenu` if you build your interface in C++; enable `AutoMenu::Json` when you want to describe supported widgets in JSON.
 
+All widget classes, data structures, events, and C++ factories are in the `widgets` namespace. `UI` remains at global scope. Include `<AutoMenu.hpp>` for the core API; when linking `AutoMenu::Json`, the same header also includes the JSON API in `json`.
+
 ## Requirements
 
 - CMake 3.28 or newer
@@ -52,29 +54,31 @@ target_link_libraries(MyGame PRIVATE AutoMenu::Json)
 
 ### Bind game values to JSON widgets
 
-The JSON description stores keys for live game values; it does not own or initialize those values. Bind shared values in C++, then give the registry to `JsonWidgetLoader`:
+The JSON description stores keys for live game values; it does not own or initialize those values. Bind shared values in C++, then give the registry to `json::JsonWidgetLoader`:
 
 ```cpp
 #include <memory>
-#include <AutoMenuJson/DefaultJsonWidgetFactoryRegistry.hpp>
-#include <AutoMenuJson/JsonWidgetLoader.hpp>
-#include <AutoMenuJson/RuntimeBindings.hpp>
+#include <AutoMenu.hpp>
+
+using namespace widgets;
 
 auto health = std::make_shared<float>(75.f);
 auto maxHealth = std::make_shared<const float>(100.f);
 
-ValueRegistry values;
+json::ValueRegistry values;
 values.bind("player.health", health);
 values.bind("player.max_health", maxHealth);
 
 UI ui;
-JsonWidgetLoader loader(values, getDefaultJsonWidgetFactoryRegistry());
+json::JsonWidgetLoader loader(values, json::getDefaultJsonWidgetFactoryRegistry());
 const auto loadedWidgets = loader.loadFile("menu.json", ui);
 ```
 
+All C++ widgets and their factories are in `widgets`. The JSON module is in `json`; linking `AutoMenu::Json` enables its inclusion from the umbrella header `AutoMenu.hpp`.
+
 Widgets created by the JSON loader retain the shared values and SFML resources they use. Runtime values remain connected to the game: for example, changing `*health` updates the bar.
 
-The default registry supports `button`, `label_button`, `sprite_button`, `label`, `bar`, `slider`, `radio_button`, `dropdown_list`, `toggle_switch`, `check_box`, and `text_input`. Each widget is created through its existing C++ `Data` structure and factory. Shared values, fonts, and textures referenced by JSON are resolved from `ValueRegistry` and kept alive by the created widget.
+The default registry supports `button`, `label_button`, `sprite_button`, `label`, `bar`, `slider`, `radio_button`, `dropdown_list`, `toggle_switch`, `check_box`, and `text_input`. Each widget is created through its existing C++ `Data` structure and factory. Shared values, fonts, and textures referenced by JSON are resolved from `json::ValueRegistry` and kept alive by the created widget.
 
 For example, a `bar` description looks like this:
 
@@ -98,13 +102,13 @@ For example, a `bar` description looks like this:
 }
 ```
 
-Colors are RGBA arrays with channel values from 0 to 255. `position` and `size` are arrays of two numbers. Value and resource fields contain keys previously registered in `ValueRegistry`; common fields use the names `value`, `font`, and `texture`, while controls with multiple textures use names such as `trackTexture` and `knobTexture`. Required widget-specific fields are checked during loading. `loadFile` interprets relative paths from the process's current working directory. See the [JSON module guide](docs/JSON.md) for each widget's required fields and a complete binding example.
+Colors are RGBA arrays with channel values from 0 to 255. `position` and `size` are arrays of two numbers. Value and resource fields contain keys previously registered in `json::ValueRegistry`; common fields use the names `value`, `font`, and `texture`, while controls with multiple textures use names such as `trackTexture` and `knobTexture`. Required widget-specific fields are checked during loading. `loadFile` interprets relative paths from the process's current working directory. See the [JSON module guide](docs/JSON.md) for each widget's required fields and a complete binding example.
 
-To add a custom JSON widget type, implement `IJsonWidgetFactory` and register it in a `JsonWidgetFactoryRegistry`; the JSON parser does not need to change.
+To add a custom JSON widget type, implement `json::IJsonWidgetFactory` and register it in a `json::JsonWidgetFactoryRegistry`; the JSON parser does not need to change.
 
 ## Typical use without JSON
 
-Create widgets with their `Data` structures and factories, transfer the returned `std::unique_ptr` to `UI::addWidget`, forward SFML events to `UI::update`, and draw the interface with `UI::render`.
+Create `widgets::` objects with their `Data` structures and factories, transfer the returned `std::unique_ptr` to `UI::addWidget`, forward SFML events to `UI::update`, and draw the interface with `UI::render`.
 
 Fonts and textures are borrowed by widgets and must outlive them. Reference-based widget values must also outlive the widget; `Bar` additionally accepts `std::shared_ptr` values when shared ownership is needed. See each widget's page for its specific requirements.
 
@@ -119,7 +123,7 @@ Fonts and textures are borrowed by widgets and must outlive them. Reference-base
 - [LabelButton](docs/LabelButton.md) — button with centered text.
 - [SpriteButton](docs/SpriteButton.md) — button drawn with a sprite.
 - [Label](docs/Label.md) — non-interactive text.
-- [Bar](docs/Bar.md) — animated value bar.
+- [Bar](docs/Bar.md) — animated value bar with a fast current-level indicator.
 - [Slider](docs/Slider.md) — horizontal sprite slider bound to a game value.
 - [RadioButton](docs/RadioButton.md) — one choice in a shared selection group.
 - [DropdownList](docs/DropdownList.md) — expandable list of options.

@@ -5,6 +5,7 @@
 ## Create with a factory
 
 ```cpp
+using namespace widgets;
 LabelData data(font, "Score: 0", {24.f, 24.f}, 26, sf::Color::White, 2);
 LabelFactory factory;
 auto label = factory.create(data);

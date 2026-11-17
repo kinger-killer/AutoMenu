@@ -5,6 +5,7 @@
 ## Create a group with a factory
 
 ```cpp
+using namespace widgets;
 int quality = 0;
 
 RadioButtonData<int> lowData(

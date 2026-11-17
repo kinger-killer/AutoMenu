@@ -5,6 +5,7 @@
 ## Create with a factory
 
 ```cpp
+using namespace widgets;
 ButtonData buttonStyle(
     sf::FloatRect({120.f, 250.f}, {260.f, 80.f}),
     sf::Color(80, 100, 160), sf::Color::White, 3.f, 1, "Play");

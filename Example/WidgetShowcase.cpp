@@ -4,15 +4,7 @@
 #include <memory>
 #include <utility>
 
-#include "../src/Widgets/Bar.hpp"
-#include "../src/Widgets/CheckBox.hpp"
-#include "../src/Widgets/DropdownList.hpp"
-#include "../src/Widgets/LabelButton.hpp"
-#include "../src/Widgets/RadioButton.hpp"
-#include "../src/Widgets/Slider.hpp"
-#include "../src/Widgets/SpriteButton.hpp"
-#include "../src/Widgets/TextInput.hpp"
-#include "../src/Widgets/ToggleSwitch.hpp"
+#include "../src/AutoMenu.hpp"
 
 namespace
 {

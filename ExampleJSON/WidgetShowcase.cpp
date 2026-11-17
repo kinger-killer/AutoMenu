@@ -6,9 +6,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "../src/Widgets/Button.hpp"
-#include <AutoMenuJson/DefaultJsonWidgetFactoryRegistry.hpp>
-#include <AutoMenuJson/JsonWidgetLoader.hpp>
+#include "../src/AutoMenu.hpp"
 
 namespace
 {
@@ -68,9 +66,9 @@ JsonExampleReferences addJsonWidgetShowcase(
 
 	std::ifstream file(AUTOMENU_JSON_EXAMPLE_MENU_FILE);
 	if (!file) throw std::runtime_error("Could not open ExampleJSON/menu.json");
-	json document;
+	json::Json document;
 	file >> document;
-	JsonWidgetLoader loader(values, getDefaultJsonWidgetFactoryRegistry());
+	json::JsonWidgetLoader loader(values, json::getDefaultJsonWidgetFactoryRegistry());
 	const auto loaded = loader.load(document, ui);
 
 	// IDs are app-side metadata; the generic widget loader deliberately ignores them.

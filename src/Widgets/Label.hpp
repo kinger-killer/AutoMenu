@@ -4,6 +4,8 @@
 
 #include "Widget.hpp"
 
+namespace widgets
+{
 class Label : public Widget
 {
 public:
@@ -84,3 +86,5 @@ public:
 		return label;
 	}
 };
+
+} // namespace widgets

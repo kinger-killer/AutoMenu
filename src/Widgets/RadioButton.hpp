@@ -4,6 +4,8 @@
 
 #include "CheckBox.hpp"
 
+namespace widgets
+{
 template <typename Value = int>
 class RadioButton : public CheckBox
 {
@@ -124,3 +126,5 @@ public:
 		return button;
 	}
 };
+
+} // namespace widgets

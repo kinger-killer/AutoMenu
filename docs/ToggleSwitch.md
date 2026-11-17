@@ -5,6 +5,7 @@
 ## Create with a factory
 
 ```cpp
+using namespace widgets;
 bool fullscreen = false;
 
 ToggleSwitchData data(
@@ -18,6 +19,7 @@ The referenced boolean and any supplied textures must outlive the toggle. The kn
 To use custom artwork, pass optional off-track, on-track, and knob textures to `ToggleSwitchData`:
 
 ```cpp
+using namespace widgets;
 ToggleSwitchData data(
     bounds, enabled, onColor, offColor, knobColor,
     outlineColor, outlineThickness, renderLayer,

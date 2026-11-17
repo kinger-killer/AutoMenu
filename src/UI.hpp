@@ -10,7 +10,7 @@
 class UI
 {
 public:
-	void addWidget(std::unique_ptr<Widget> widget)
+	void addWidget(std::unique_ptr<widgets::Widget> widget)
 	{
 		if (widget)
 		{
@@ -45,5 +45,5 @@ private:
 			});
 	}
 
-	std::vector<std::unique_ptr<Widget>> widgets;
+	std::vector<std::unique_ptr<widgets::Widget>> widgets;
 };

@@ -5,6 +5,7 @@
 ## Create with a factory
 
 ```cpp
+using namespace widgets;
 float volume = 0.5f;
 
 SliderData<float> data(

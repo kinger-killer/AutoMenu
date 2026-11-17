@@ -5,6 +5,7 @@
 ## Create with a factory
 
 ```cpp
+using namespace widgets;
 sf::String playerName;
 
 TextInputData data(

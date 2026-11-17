@@ -4,6 +4,8 @@
 
 #include "Button.hpp"
 
+namespace widgets
+{
 class SpriteButton : public Button
 {
 public:
@@ -79,3 +81,5 @@ public:
 		return button;
 	}
 };
+
+} // namespace widgets

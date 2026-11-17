@@ -3,10 +3,9 @@
 #include <memory>
 
 #include "../Example/ExampleAssets.hpp"
-#include "../src/Observer.hpp"
-#include "../src/UI.hpp"
-#include "../src/Widgets/Label.hpp"
-#include <AutoMenuJson/RuntimeBindings.hpp>
+#include "../src/AutoMenu.hpp"
+
+using namespace widgets;
 
 struct JsonExampleState
 {
@@ -25,7 +24,7 @@ struct JsonExampleReferences
 {
 	Label* volumeLabel = nullptr;
 	std::shared_ptr<IObserver> buttonObserver;
-	ValueRegistry values;
+	json::ValueRegistry values;
 };
 
 JsonExampleReferences addJsonWidgetShowcase(

@@ -5,6 +5,7 @@
 ## Create with a factory
 
 ```cpp
+using namespace widgets;
 std::size_t resolution = 0;
 
 DropdownListData data(
@@ -22,6 +23,7 @@ The font and selected-index variable must outlive the dropdown. The options are 
 Get an option button by index to subscribe to its events or customize it:
 
 ```cpp
+using namespace widgets;
 if (Button* option = list->getOptionButton(0))
     option->subscribe(observer);
 ```

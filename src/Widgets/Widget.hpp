@@ -8,6 +8,8 @@
 
 #include "../Observer.hpp"
 
+namespace widgets
+{
 template <typename T>
 struct UiField : public Event 
 {
@@ -51,3 +53,4 @@ public:
 	[[nodiscard]] virtual std::unique_ptr<Product> create(const Data& data) const = 0;
 };
 
+} // namespace widgets

@@ -11,15 +11,17 @@
 #include <AutoMenuJson/RuntimeBindings.hpp>
 #include "Widgets/Widget.hpp"
 
-using json = nlohmann::json;
+namespace json
+{
+using Json = nlohmann::json;
 
 class IJsonWidgetFactory
 {
 public:
 	virtual ~IJsonWidgetFactory() = default;
 	[[nodiscard]] virtual std::string_view widgetType() const = 0;
-	[[nodiscard]] virtual std::unique_ptr<Widget> createWidget(
-		const json& data, const ValueRegistry& values) const = 0;
+	[[nodiscard]] virtual std::unique_ptr<widgets::Widget> createWidget(
+		const Json& data, const ValueRegistry& values) const = 0;
 };
 
 // Dispatches JSON widget descriptions to registered per-type factories.
@@ -38,8 +40,8 @@ public:
 		factories.emplace(type, std::move(factory));
 	}
 
-	[[nodiscard]] std::unique_ptr<Widget> createWidget(
-		const json& data, const ValueRegistry& values) const
+	[[nodiscard]] std::unique_ptr<widgets::Widget> createWidget(
+		const Json& data, const ValueRegistry& values) const
 	{
 		if (!data.is_object() || !data.contains("type"))
 			throw std::invalid_argument("Each widget description must have a 'type'");
@@ -53,5 +55,7 @@ public:
 	}
 
 private:
-	std::unordered_map<std::string, std::unique_ptr<IJsonWidgetFactory>> factories;
+		std::unordered_map<std::string, std::unique_ptr<IJsonWidgetFactory>> factories;
 };
+
+} // namespace json

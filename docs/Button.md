@@ -5,6 +5,7 @@
 ## Create with a factory
 
 ```cpp
+using namespace widgets;
 ButtonData data(
     sf::FloatRect({120.f, 250.f}, {260.f, 80.f}),
     sf::Color(80, 100, 160), // fill
@@ -26,6 +27,7 @@ The button can also be styled later with `setFillColor`, `setHoverFillColor`, `s
 `Button` implements `ISubject`. Subscribe a shared observer to receive `ButtonEvent`:
 
 ```cpp
+using namespace widgets;
 auto observer = std::make_shared<MyObserver>();
 button->subscribe(observer);
 ```

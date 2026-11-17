@@ -5,6 +5,7 @@
 ## Create with a factory
 
 ```cpp
+using namespace widgets;
 bool subtitles = true;
 
 CheckBoxData data(
@@ -21,6 +22,7 @@ The font and boolean must outlive the checkbox. The bounds height determines the
 `CheckBoxDesign` accepts two optional textures: `indicatorTexture` for the outline/base artwork and `checkedMarkTexture` for the checked mark. They can contain any shape or artwork (for example, a square, triangle, or custom icon). Use transparent backgrounds so only the artwork is drawn. The textures are scaled proportionally to fit the indicator area.
 
 ```cpp
+using namespace widgets;
 sf::Texture outlineTexture;
 sf::Texture checkMarkTexture;
 outlineTexture.loadFromFile("assets/triangle-outline.png");

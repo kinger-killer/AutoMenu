@@ -6,6 +6,8 @@
 
 #include "Button.hpp"
 
+namespace widgets
+{
 struct CheckBoxDesign
 {
 	CheckBoxDesign(
@@ -211,3 +213,5 @@ public:
 		return box;
 	}
 };
+
+} // namespace widgets

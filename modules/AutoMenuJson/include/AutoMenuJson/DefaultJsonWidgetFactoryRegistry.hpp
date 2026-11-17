@@ -15,6 +15,8 @@
 #include <AutoMenuJson/Factories/TextInputJsonWidgetFactory.hpp>
 #include <AutoMenuJson/Factories/ToggleSwitchJsonWidgetFactory.hpp>
 
+namespace json
+{
 // The registry only connects JSON type names to the corresponding factory.
 inline JsonWidgetFactoryRegistry createDefaultJsonWidgetFactoryRegistry()
 {
@@ -38,3 +40,5 @@ inline const JsonWidgetFactoryRegistry& getDefaultJsonWidgetFactoryRegistry()
 	static const JsonWidgetFactoryRegistry registry = createDefaultJsonWidgetFactoryRegistry();
 	return registry;
 }
+
+} // namespace json

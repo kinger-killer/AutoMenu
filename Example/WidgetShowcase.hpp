@@ -3,9 +3,9 @@
 #include <memory>
 
 #include "ExampleAssets.hpp"
-#include "../src/Observer.hpp"
-#include "../src/UI.hpp"
-#include "../src/Widgets/Label.hpp"
+#include "../src/AutoMenu.hpp"
+
+using namespace widgets;
 
 struct ExampleState
 {

@@ -5,6 +5,7 @@
 ## Create with a factory
 
 ```cpp
+using namespace widgets;
 ButtonData buttonStyle(
     sf::FloatRect({500.f, 240.f}, {120.f, 120.f}),
     sf::Color::White, sf::Color::White, 0.f, 1, "Inventory");

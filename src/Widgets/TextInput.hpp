@@ -7,6 +7,8 @@
 
 #include "Widget.hpp"
 
+namespace widgets
+{
 class TextInput : public Widget
 {
 public:
@@ -272,3 +274,5 @@ public:
 		return input;
 	}
 };
+
+} // namespace widgets

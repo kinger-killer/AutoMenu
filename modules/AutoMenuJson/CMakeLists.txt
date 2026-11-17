@@ -22,7 +22,9 @@ target_link_libraries(AutoMenuJson INTERFACE
 	AutoMenu
 	nlohmann_json::nlohmann_json
 )
+target_compile_definitions(AutoMenuJson INTERFACE AUTOMENU_WITH_JSON)
 target_sources(AutoMenuJson INTERFACE
+	${CMAKE_CURRENT_SOURCE_DIR}/include/AutoMenuJson/AutoMenuJson.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/AutoMenuJson/Factories/BarJsonWidgetFactory.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/AutoMenuJson/Factories/ButtonJsonWidgetFactory.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/AutoMenuJson/Factories/CheckBoxJsonWidgetFactory.hpp

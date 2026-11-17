@@ -10,6 +10,8 @@
 
 // Stores shared ownership of named game values. A widget receives its own shared_ptr
 // when the runtime loader resolves a key.
+namespace json
+{
 class ValueRegistry
 {
 public:
@@ -48,3 +50,5 @@ public:
 private:
 	std::unordered_map<std::string, std::any> values;
 };
+
+} // namespace json

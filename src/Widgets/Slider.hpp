@@ -7,6 +7,8 @@
 
 #include "Widget.hpp"
 
+namespace widgets
+{
 template <typename Value = float>
 class Slider : public Widget
 {
@@ -185,3 +187,5 @@ public:
 		return slider;
 	}
 };
+
+} // namespace widgets

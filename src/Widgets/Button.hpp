@@ -11,6 +11,8 @@
 #include "Widget.hpp"
 #include "../Observer.hpp"
 
+namespace widgets
+{
 enum class ButtonEventType
 {
 	Pressed,
@@ -276,3 +278,4 @@ public:
 	}
 };
 
+} // namespace widgets

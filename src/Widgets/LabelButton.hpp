@@ -4,6 +4,8 @@
 
 #include "Button.hpp"
 
+namespace widgets
+{
 class LabelButton : public Button
 {
 public:
@@ -92,3 +94,5 @@ public:
 		return button;
 	}
 };
+
+} // namespace widgets
