@@ -2,7 +2,7 @@
 #include <AutoMenuJson/JsonWidgetFactoryHelpers.hpp>
 #include "Widgets/CheckBox.hpp"
 
-namespace json
+namespace AutoMenu::json
 {
 class CheckBoxJsonWidgetFactory final : public JsonWidgetDetails::BuiltInJsonWidgetFactory<CheckBoxJsonWidgetFactory>
 {
@@ -30,4 +30,4 @@ public:
 	}
 };
 
-} // namespace json
+} // namespace AutoMenu::json

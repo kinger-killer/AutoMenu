@@ -2,7 +2,7 @@
 #include <AutoMenuJson/JsonWidgetFactoryHelpers.hpp>
 #include "Widgets/Slider.hpp"
 
-namespace json
+namespace AutoMenu::json
 {
 class SliderJsonWidgetFactory final : public JsonWidgetDetails::BuiltInJsonWidgetFactory<SliderJsonWidgetFactory>
 {
@@ -22,4 +22,4 @@ public:
 	}
 };
 
-} // namespace json
+} // namespace AutoMenu::json

@@ -1,11 +1,14 @@
 # Button
 
+[Documentation](README.md) / Button
+
 `Button` is a rectangular interactive widget. It emits events for left mouse presses and releases inside its bounds, and for mouse hover beginning or ending.
 
 ## Create with a factory
 
 ```cpp
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 ButtonData data(
     sf::FloatRect({120.f, 250.f}, {260.f, 80.f}),
     sf::Color(80, 100, 160), // fill
@@ -18,6 +21,8 @@ ButtonFactory factory;
 auto button = factory.create(data);
 ```
 
+## Defaults and styling
+
 `ButtonData` defaults to a 200×80 button at (0, 0), a blue fill, white outline, 3-pixel outline thickness, layer 0, and an empty name.
 
 The button can also be styled later with `setFillColor`, `setHoverFillColor`, `setHoverBrightness`, `setPressedBrightness`, `setOutline`, `setName`, `setPosition`, and `setSize`. By default, it lightens on hover and darkens while pressed. Brightness values are in the range `[-1, 1]`: positive values lighten, negative values darken, and zero disables the effect. An optional hover fill color becomes the base color for the hover effect. `Button::update` handles these visual changes internally and still emits hover events for observers.
@@ -27,7 +32,8 @@ The button can also be styled later with `setFillColor`, `setHoverFillColor`, `s
 `Button` implements `ISubject`. Subscribe a shared observer to receive `ButtonEvent`:
 
 ```cpp
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 auto observer = std::make_shared<MyObserver>();
 button->subscribe(observer);
 ```
@@ -39,3 +45,9 @@ button->subscribe(observer);
 - `buttonName`: a copy of the button name at the time of the event.
 
 Events are delivered synchronously during `UI::update`. The observer must remain alive; the subject stores only a weak reference. `Pressed` and `Released` are emitted when the corresponding left mouse action occurs inside the button bounds. A release outside the bounds does not emit `Released`.
+
+## See also
+
+- [UI: ownership, updates, and rendering](UI.md)
+- [JSON widget descriptions](JSON.md#widget-descriptions)
+- [All widgets](README.md#widget-reference)

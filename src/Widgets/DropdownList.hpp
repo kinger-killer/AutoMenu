@@ -7,7 +7,7 @@
 
 #include "Button.hpp"
 
-namespace widgets
+namespace AutoMenu::widgets
 {
 class DropdownOptionButton : public Button
 {
@@ -270,4 +270,4 @@ public:
 	}
 };
 
-} // namespace widgets
+} // namespace AutoMenu::widgets

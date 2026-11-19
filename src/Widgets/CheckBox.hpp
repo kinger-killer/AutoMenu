@@ -6,7 +6,7 @@
 
 #include "Button.hpp"
 
-namespace widgets
+namespace AutoMenu::widgets
 {
 struct CheckBoxDesign
 {
@@ -214,4 +214,4 @@ public:
 	}
 };
 
-} // namespace widgets
+} // namespace AutoMenu::widgets

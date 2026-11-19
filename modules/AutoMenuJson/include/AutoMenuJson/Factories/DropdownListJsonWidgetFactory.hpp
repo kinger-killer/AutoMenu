@@ -2,7 +2,7 @@
 #include <AutoMenuJson/JsonWidgetFactoryHelpers.hpp>
 #include "Widgets/DropdownList.hpp"
 
-namespace json
+namespace AutoMenu::json
 {
 class DropdownListJsonWidgetFactory final : public JsonWidgetDetails::BuiltInJsonWidgetFactory<DropdownListJsonWidgetFactory>
 {
@@ -25,4 +25,4 @@ public:
 	}
 };
 
-} // namespace json
+} // namespace AutoMenu::json

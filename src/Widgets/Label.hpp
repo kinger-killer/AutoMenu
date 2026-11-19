@@ -4,7 +4,7 @@
 
 #include "Widget.hpp"
 
-namespace widgets
+namespace AutoMenu::widgets
 {
 class Label : public Widget
 {
@@ -87,4 +87,4 @@ public:
 	}
 };
 
-} // namespace widgets
+} // namespace AutoMenu::widgets

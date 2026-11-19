@@ -11,7 +11,7 @@
 #include "Widget.hpp"
 #include "../Observer.hpp"
 
-namespace widgets
+namespace AutoMenu::widgets
 {
 enum class ButtonEventType
 {
@@ -278,4 +278,4 @@ public:
 	}
 };
 
-} // namespace widgets
+} // namespace AutoMenu::widgets

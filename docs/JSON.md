@@ -1,8 +1,14 @@
 # JSON module
 
-The optional `AutoMenu::Json` target reads a JSON document and creates widgets through the same C++ `Data` structures and factories used by the core library. The document describes widget type, layout, and style. C++ supplies live game values and SFML resources through `json::ValueRegistry`.
+[Documentation](README.md) / JSON module
 
-Link `AutoMenu::Json` and include `<AutoMenu.hpp>` to use both modules through the umbrella header. The core widget API is in `widgets`; JSON types and helpers are in `json`.
+The optional `AutoMenu::Json` target reads a JSON document and creates widgets through the same C++ `Data` structures and factories used by the core library. The document describes widget type, layout, and style. C++ supplies live game values and SFML resources through `AutoMenu::json::ValueRegistry`.
+
+Link `AutoMenu::Json` and include `<AutoMenu.hpp>` to use both modules through the umbrella header. The core widget API is in `AutoMenu::widgets`; JSON types and helpers are in `AutoMenu::json`.
+
+## Enable the module
+
+Follow [Installation](Installation.md#optional-json-module) to enable `AUTOMENU_BUILD_JSON` and link `AutoMenu::Json`.
 
 ## Bind values and resources
 
@@ -13,24 +19,25 @@ Bind each named value as a `std::shared_ptr`. The registered C++ type must match
 
 #include <AutoMenu.hpp>
 
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 
 auto health = std::make_shared<float>(75.f);
 auto maximumHealth = std::make_shared<const float>(100.f);
 auto font = std::make_shared<sf::Font>();
 font->openFromFile("assets/arial.ttf");
 
-json::ValueRegistry values;
+AutoMenu::json::ValueRegistry values;
 values.bind("player.health", health);
 values.bind("player.max_health", maximumHealth);
 values.bind("assets.font", font);
 
 UI ui;
-json::JsonWidgetLoader loader(values, json::getDefaultJsonWidgetFactoryRegistry());
+AutoMenu::json::JsonWidgetLoader loader(values, AutoMenu::json::getDefaultJsonWidgetFactoryRegistry());
 const auto loadedWidgets = loader.loadFile("menu.json", ui);
 ```
 
-The widget keeps its own `shared_ptr` to each bound dependency it uses. It can therefore continue using a value or resource if the corresponding entry is later erased from `json::ValueRegistry`.
+The widget keeps its own `shared_ptr` to each bound dependency it uses. It can therefore continue using a value or resource if the corresponding entry is later erased from `AutoMenu::json::ValueRegistry`.
 
 The default registry supports these live-value types:
 
@@ -44,7 +51,7 @@ The default registry supports these live-value types:
 | `check_box` | `value` | `bool` |
 | `text_input` | `value` | `sf::String` |
 
-Font and texture fields also refer to keys in `json::ValueRegistry`. Bind them as `std::shared_ptr<sf::Font>` or `std::shared_ptr<sf::Texture>`. A widget that uses a font or texture retains it for its lifetime.
+Font and texture fields also refer to keys in `AutoMenu::json::ValueRegistry`. Bind them as `std::shared_ptr<sf::Font>` or `std::shared_ptr<sf::Texture>`. A widget that uses a font or texture retains it for its lifetime.
 
 ## Widget descriptions
 
@@ -87,10 +94,22 @@ For example, this bar description uses the keys bound above:
 }
 ```
 
-`json::JsonWidgetLoader::load` and `loadFile` return pointers to the newly created widgets in document order. Use them to connect C++ behavior such as `widgets::Button::subscribe`; visual layout and widget construction can remain in JSON while application behavior remains in C++.
+## Loading and application behavior
 
-All core widget types and their factories are in the `widgets` namespace. The JSON module APIs and per-widget JSON factories live in the `json` namespace. Factory classes are in `modules/AutoMenuJson/include/AutoMenuJson/Factories`, one class per file. To add a widget type, implement `json::IJsonWidgetFactory` and register it in `json::JsonWidgetFactoryRegistry`. The JSON parser itself does not need to change.
+`AutoMenu::json::JsonWidgetLoader::load` and `loadFile` return pointers to the newly created widgets in document order. Use them to connect C++ behavior such as `AutoMenu::widgets::Button::subscribe`; visual layout and widget construction can remain in JSON while application behavior remains in C++.
+
+## Custom JSON widgets
+
+All core widget types and their factories are in `AutoMenu::widgets`. The JSON module APIs and per-widget JSON factories live in `AutoMenu::json`. Factory classes are in `modules/AutoMenuJson/include/AutoMenuJson/Factories`, one class per file. To add a widget type, implement `AutoMenu::json::IJsonWidgetFactory` and register it in `AutoMenu::json::JsonWidgetFactoryRegistry`. The JSON parser itself does not need to change.
+
+## Header integration
 
 When the application links `AutoMenu::Json`, CMake defines `AUTOMENU_WITH_JSON` for that target. The umbrella header `AutoMenu.hpp` then includes the JSON module automatically. Linking only `AutoMenu` keeps the JSON headers out of the umbrella include.
 
 The JSON example demonstrates the complete interface and runtime bindings in [`ExampleJSON`](../ExampleJSON/menu.json). Its optional `id` fields are application metadata; the generic loader ignores them.
+
+## See also
+
+- [First interface](GettingStarted.md)
+- [Examples](Examples.md)
+- [Widget reference](README.md#widget-reference)

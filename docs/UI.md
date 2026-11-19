@@ -1,5 +1,7 @@
 # UI
 
+[Documentation](README.md) / UI
+
 `UI` owns a collection of widgets and forwards drawing and updates to them. A game can keep one `UI` per menu screen or HUD and select which one to update and render.
 
 ## Add widgets
@@ -7,7 +9,8 @@
 Factories return `std::unique_ptr` objects. Transfer ownership to the UI:
 
 ```cpp
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 UI menu;
 ButtonFactory factory;
 auto playButton = factory.create(buttonData);
@@ -21,7 +24,8 @@ menu.addWidget(std::move(playButton));
 `update` accepts one SFML event and a `sf::Time` delta. Call it for each event so interactive widgets receive input. Call `render` during the draw part of each frame:
 
 ```cpp
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 while (const auto event = window.pollEvent())
 {
     if (event->is<sf::Event::Closed>())
@@ -38,3 +42,9 @@ ui.render(window);
 Passing zero during event dispatch prevents animations from advancing once for every queued event. The extra focus-gained event provides one time update per frame; widgets use its elapsed time for effects such as the `Bar` and `ToggleSwitch` animations and the `TextInput` caret blink. These widgets ignore the event itself.
 
 `UI` does not own fonts, textures, or game state referenced by widgets. Keep those resources alive until the widgets that use them are destroyed.
+
+## See also
+
+- [First interface](GettingStarted.md)
+- [Examples](Examples.md)
+- [Widget reference](README.md#widget-reference)

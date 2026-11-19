@@ -9,7 +9,7 @@
 #include <AutoMenuJson/JsonWidgetFactory.hpp>
 #include "Widgets/Button.hpp"
 
-namespace json::JsonWidgetDetails
+namespace AutoMenu::json::JsonWidgetDetails
 {
 	template <typename Derived>
 	class BuiltInJsonWidgetFactory : public IJsonWidgetFactory

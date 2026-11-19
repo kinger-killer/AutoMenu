@@ -1,11 +1,14 @@
 # CheckBox
 
+[Documentation](README.md) / CheckBox
+
 `CheckBox` is a labeled boolean control derived from `Button`. A left click inside the full widget bounds toggles the referenced `bool`; it also emits the standard `ButtonEvent` events and can be subscribed to with `subscribe()`. By default, it draws a circle that changes from outlined to filled.
 
 ## Create with a factory
 
 ```cpp
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 bool subtitles = true;
 
 CheckBoxData data(
@@ -22,7 +25,8 @@ The font and boolean must outlive the checkbox. The bounds height determines the
 `CheckBoxDesign` accepts two optional textures: `indicatorTexture` for the outline/base artwork and `checkedMarkTexture` for the checked mark. They can contain any shape or artwork (for example, a square, triangle, or custom icon). Use transparent backgrounds so only the artwork is drawn. The textures are scaled proportionally to fit the indicator area.
 
 ```cpp
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 sf::Texture outlineTexture;
 sf::Texture checkMarkTexture;
 outlineTexture.loadFromFile("assets/triangle-outline.png");
@@ -35,3 +39,9 @@ CheckBoxData data(bounds, font, "Subtitles", subtitles, design);
 ```
 
 Keep both textures alive for as long as the checkbox uses them. The design also contains `outlineColor`, `hoverColor`, `checkedColor`, `hoverFillColor`, `uncheckedFillColor`, `textColor`, `outlineThickness`, `indicatorSizeRatio`, and `characterSize`. The design can be replaced at runtime with `checkBox->setDesign(newDesign)` or inspected with `getDesign()`.
+
+## See also
+
+- [UI: ownership, updates, and rendering](UI.md)
+- [JSON widget descriptions](JSON.md#widget-descriptions)
+- [All widgets](README.md#widget-reference)

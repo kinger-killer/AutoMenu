@@ -5,7 +5,8 @@
 #include "ExampleAssets.hpp"
 #include "../src/AutoMenu.hpp"
 
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 
 struct ExampleState
 {

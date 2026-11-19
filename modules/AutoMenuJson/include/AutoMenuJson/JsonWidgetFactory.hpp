@@ -11,7 +11,7 @@
 #include <AutoMenuJson/RuntimeBindings.hpp>
 #include "Widgets/Widget.hpp"
 
-namespace json
+namespace AutoMenu::json
 {
 using Json = nlohmann::json;
 
@@ -58,4 +58,4 @@ private:
 		std::unordered_map<std::string, std::unique_ptr<IJsonWidgetFactory>> factories;
 };
 
-} // namespace json
+} // namespace AutoMenu::json

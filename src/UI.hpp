@@ -7,6 +7,8 @@
 
 #include "Widgets/Widget.hpp"
 
+namespace AutoMenu
+{
 class UI
 {
 public:
@@ -47,3 +49,5 @@ private:
 
 	std::vector<std::unique_ptr<widgets::Widget>> widgets;
 };
+
+} // namespace AutoMenu

@@ -4,7 +4,7 @@
 
 #include "CheckBox.hpp"
 
-namespace widgets
+namespace AutoMenu::widgets
 {
 template <typename Value = int>
 class RadioButton : public CheckBox
@@ -127,4 +127,4 @@ public:
 	}
 };
 
-} // namespace widgets
+} // namespace AutoMenu::widgets

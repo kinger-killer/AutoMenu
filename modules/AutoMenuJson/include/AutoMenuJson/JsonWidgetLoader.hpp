@@ -12,7 +12,7 @@
 #include "UI.hpp"
 
 // Reads JSON documents and hands each widget description to its registered factory.
-namespace json
+namespace AutoMenu::json
 {
 class JsonWidgetLoader
 {
@@ -59,4 +59,4 @@ private:
 	const JsonWidgetFactoryRegistry& factories;
 };
 
-} // namespace json
+} // namespace AutoMenu::json

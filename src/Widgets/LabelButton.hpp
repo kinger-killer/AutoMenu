@@ -4,7 +4,7 @@
 
 #include "Button.hpp"
 
-namespace widgets
+namespace AutoMenu::widgets
 {
 class LabelButton : public Button
 {
@@ -95,4 +95,4 @@ public:
 	}
 };
 
-} // namespace widgets
+} // namespace AutoMenu::widgets

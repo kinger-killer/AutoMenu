@@ -2,7 +2,7 @@
 #include <AutoMenuJson/JsonWidgetFactoryHelpers.hpp>
 #include "Widgets/RadioButton.hpp"
 
-namespace json
+namespace AutoMenu::json
 {
 class RadioButtonJsonWidgetFactory final : public JsonWidgetDetails::BuiltInJsonWidgetFactory<RadioButtonJsonWidgetFactory>
 {
@@ -24,4 +24,4 @@ public:
 	}
 };
 
-} // namespace json
+} // namespace AutoMenu::json

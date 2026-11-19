@@ -66,9 +66,9 @@ JsonExampleReferences addJsonWidgetShowcase(
 
 	std::ifstream file(AUTOMENU_JSON_EXAMPLE_MENU_FILE);
 	if (!file) throw std::runtime_error("Could not open ExampleJSON/menu.json");
-	json::Json document;
+	AutoMenu::json::Json document;
 	file >> document;
-	json::JsonWidgetLoader loader(values, json::getDefaultJsonWidgetFactoryRegistry());
+	AutoMenu::json::JsonWidgetLoader loader(values, AutoMenu::json::getDefaultJsonWidgetFactoryRegistry());
 	const auto loaded = loader.load(document, ui);
 
 	// IDs are app-side metadata; the generic widget loader deliberately ignores them.

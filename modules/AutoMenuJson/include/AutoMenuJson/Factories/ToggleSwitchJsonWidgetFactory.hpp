@@ -2,7 +2,7 @@
 #include <AutoMenuJson/JsonWidgetFactoryHelpers.hpp>
 #include "Widgets/ToggleSwitch.hpp"
 
-namespace json
+namespace AutoMenu::json
 {
 class ToggleSwitchJsonWidgetFactory final : public JsonWidgetDetails::BuiltInJsonWidgetFactory<ToggleSwitchJsonWidgetFactory>
 {
@@ -29,4 +29,4 @@ public:
 	}
 };
 
-} // namespace json
+} // namespace AutoMenu::json

@@ -2,7 +2,7 @@
 #include <AutoMenuJson/JsonWidgetFactoryHelpers.hpp>
 #include "Widgets/TextInput.hpp"
 
-namespace json
+namespace AutoMenu::json
 {
 class TextInputJsonWidgetFactory final : public JsonWidgetDetails::BuiltInJsonWidgetFactory<TextInputJsonWidgetFactory>
 {
@@ -23,4 +23,4 @@ public:
 	}
 };
 
-} // namespace json
+} // namespace AutoMenu::json

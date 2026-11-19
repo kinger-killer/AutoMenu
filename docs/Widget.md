@@ -1,13 +1,16 @@
 # Widget
 
+[Documentation](README.md) / Widget
+
 `Widget` is the abstract base class for all AutoMenu components. It defines the interface that `UI` uses for drawing, input updates, and render-layer ordering.
 
-Widget classes, events, data structures, and C++ factories live in the `widgets` namespace. Include `<AutoMenu.hpp>` to include the core API.
+Widget classes, events, data structures, and C++ factories live in `AutoMenu::widgets`. Include `<AutoMenu.hpp>` to include the core API.
 
 ## Interface
 
 ```cpp
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 class Widget
 {
 public:
@@ -30,7 +33,8 @@ Smaller render-layer values are rendered first. The default layer is `0`.
 Derive from `Widget` and implement `render` and `update`:
 
 ```cpp
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 class CustomWidget : public Widget
 {
 public:
@@ -44,3 +48,9 @@ public:
 Use `WidgetFactory<Product, Data>` as the common factory interface. See [UI](UI.md) for adding custom widgets to a UI.
 
 Widgets created by the optional JSON module keep their bound values, fonts, and textures alive through shared ownership. Widgets created directly with core C++ factories follow the lifetime rules documented on each widget's page.
+
+## See also
+
+- [First interface](GettingStarted.md)
+- [Examples](Examples.md)
+- [Widget reference](README.md#widget-reference)

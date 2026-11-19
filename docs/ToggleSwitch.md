@@ -1,11 +1,14 @@
 # ToggleSwitch
 
+[Documentation](README.md) / ToggleSwitch
+
 `ToggleSwitch` is an on/off control backed by a `bool` owned by the game. A left click inside its bounds toggles that value. The track color and knob position reflect the value.
 
 ## Create with a factory
 
 ```cpp
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 bool fullscreen = false;
 
 ToggleSwitchData data(
@@ -14,12 +17,17 @@ ToggleSwitchFactory factory;
 auto toggle = factory.create(data);
 ```
 
+## Ownership and animation
+
 The referenced boolean and any supplied textures must outlive the toggle. The knob moves smoothly between the ends of the track. `ToggleSwitchData` configures the animation duration and knob scale, as well as colors, outline, and render layer.
+
+## Custom artwork
 
 To use custom artwork, pass optional off-track, on-track, and knob textures to `ToggleSwitchData`:
 
 ```cpp
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 ToggleSwitchData data(
     bounds, enabled, onColor, offColor, knobColor,
     outlineColor, outlineThickness, renderLayer,
@@ -28,3 +36,9 @@ ToggleSwitchData data(
 ```
 
 Both track textures are required to use custom track artwork; if either is `nullptr`, the built-in colored track is used. The knob texture is independent: set it to `nullptr` to use the built-in circle. Track textures are stretched to the control bounds. The knob texture is scaled to a square based on the track height and `knobScale`, then moves along the track.
+
+## See also
+
+- [UI: ownership, updates, and rendering](UI.md)
+- [JSON widget descriptions](JSON.md#widget-descriptions)
+- [All widgets](README.md#widget-reference)

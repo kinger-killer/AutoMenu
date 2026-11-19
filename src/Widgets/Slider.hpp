@@ -7,7 +7,7 @@
 
 #include "Widget.hpp"
 
-namespace widgets
+namespace AutoMenu::widgets
 {
 template <typename Value = float>
 class Slider : public Widget
@@ -188,4 +188,4 @@ public:
 	}
 };
 
-} // namespace widgets
+} // namespace AutoMenu::widgets

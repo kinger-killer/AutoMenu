@@ -2,6 +2,8 @@
 #include <vector>
 #include <memory>
 
+namespace AutoMenu
+{
 struct Event
 {
 	virtual ~Event() = default;
@@ -54,3 +56,5 @@ protected:
 private:
 	std::vector<std::weak_ptr<IObserver>> observers_;
 };
+
+} // namespace AutoMenu

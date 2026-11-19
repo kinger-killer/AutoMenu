@@ -1,20 +1,12 @@
 # AutoMenu
 
-AutoMenu is a header-only C++20 UI library for SFML 3. It provides widgets for game menus and in-game interfaces, including buttons, labels, bars, sliders, selection controls, and text input.
+AutoMenu is a header-only C++20 UI library for SFML 3. It provides buttons, labels, progress bars, sliders, selection controls, and text input for game menus and in-game interfaces.
 
-The core library and the JSON loader are separate CMake targets. Use only `AutoMenu` if you build your interface in C++; enable `AutoMenu::Json` when you want to describe supported widgets in JSON.
+Build interfaces in C++ with the core `AutoMenu` target, or enable `AutoMenu::Json` to describe layout and style in JSON while binding game values and resources in C++.
 
-All widget classes, data structures, events, and C++ factories are in the `widgets` namespace. `UI` remains at global scope. Include `<AutoMenu.hpp>` for the core API; when linking `AutoMenu::Json`, the same header also includes the JSON API in `json`.
+## Quick start
 
-## Requirements
-
-- CMake 3.28 or newer
-- A C++20 compiler
-- SFML 3 (fetched by AutoMenu)
-
-## Add the core library with FetchContent
-
-Add AutoMenu to your project's `CMakeLists.txt`:
+Requires CMake 3.28 or newer and a C++20 compiler. CMake fetches SFML 3.1.0 automatically.
 
 ```cmake
 include(FetchContent)
@@ -29,105 +21,28 @@ FetchContent_MakeAvailable(AutoMenu)
 target_link_libraries(MyGame PRIVATE AutoMenu)
 ```
 
-For reproducible dependency versions, replace `main` with a release tag or commit identifier. The core target brings in SFML Graphics and does not fetch nlohmann/json.
+Replace `main` with a release tag or commit identifier for reproducible builds. Include `<AutoMenu.hpp>` in your C++ code; `AutoMenu::UI` manages widgets, and widget classes and factories live in `AutoMenu::widgets`.
 
-## Enable the optional JSON module
+Continue with [your first interface](docs/GettingStarted.md), or see [installation](docs/Installation.md) for JSON support and dependency details.
 
-Set `AUTOMENU_BUILD_JSON` before `FetchContent_MakeAvailable(AutoMenu)`, then link `AutoMenu::Json` instead of linking the core target directly:
+## Documentation
 
-```cmake
-include(FetchContent)
+- [Documentation index](docs/README.md) — learning path, core concepts, and widget reference.
+- [UI lifecycle](docs/UI.md) — ownership, updates, frame timing, and rendering.
+- [JSON module](docs/JSON.md) — runtime bindings and supported widget fields.
+- [Examples](docs/Examples.md) — build the C++ and JSON showcases.
+- [Custom widgets](docs/Widget.md#creating-a-custom-widget) — extend the base widget interface.
 
-set(AUTOMENU_BUILD_JSON ON)
+## Project layout
 
-FetchContent_Declare(
-    AutoMenu
-    GIT_REPOSITORY https://github.com/kinger-killer/AutoMenu.git
-    GIT_TAG v1.1.0
-)
-FetchContent_MakeAvailable(AutoMenu)
+| Directory | Contents |
+| --- | --- |
+| [`src`](src) | Header-only core library and widget factories |
+| [`modules/AutoMenuJson`](modules/AutoMenuJson) | Optional JSON loader, registry, and factories |
+| [`Example`](Example) | Interface configured in C++ |
+| [`ExampleJSON`](ExampleJSON) | Interface loaded from JSON with C++ runtime bindings |
+| [`docs`](docs/README.md) | Guides and widget reference |
 
-target_link_libraries(MyGame PRIVATE AutoMenu::Json)
-```
+## License
 
-`AutoMenu::Json` also links the core `AutoMenu` target. Enabling it makes CMake fetch nlohmann/json 3.12.0. The JSON module is in [`modules/AutoMenuJson`](modules/AutoMenuJson) and is off by default.
-
-### Bind game values to JSON widgets
-
-The JSON description stores keys for live game values; it does not own or initialize those values. Bind shared values in C++, then give the registry to `json::JsonWidgetLoader`:
-
-```cpp
-#include <memory>
-#include <AutoMenu.hpp>
-
-using namespace widgets;
-
-auto health = std::make_shared<float>(75.f);
-auto maxHealth = std::make_shared<const float>(100.f);
-
-json::ValueRegistry values;
-values.bind("player.health", health);
-values.bind("player.max_health", maxHealth);
-
-UI ui;
-json::JsonWidgetLoader loader(values, json::getDefaultJsonWidgetFactoryRegistry());
-const auto loadedWidgets = loader.loadFile("menu.json", ui);
-```
-
-All C++ widgets and their factories are in `widgets`. The JSON module is in `json`; linking `AutoMenu::Json` enables its inclusion from the umbrella header `AutoMenu.hpp`.
-
-Widgets created by the JSON loader retain the shared values and SFML resources they use. Runtime values remain connected to the game: for example, changing `*health` updates the bar.
-
-The default registry supports `button`, `label_button`, `sprite_button`, `label`, `bar`, `slider`, `radio_button`, `dropdown_list`, `toggle_switch`, `check_box`, and `text_input`. Each widget is created through its existing C++ `Data` structure and factory. Shared values, fonts, and textures referenced by JSON are resolved from `json::ValueRegistry` and kept alive by the created widget.
-
-For example, a `bar` description looks like this:
-
-```json
-{
-  "widgets": [
-    {
-      "type": "bar",
-      "position": [70, 185],
-      "size": [460, 28],
-      "value": "player.health",
-      "maximum": "player.max_health",
-      "background": [70, 70, 70, 255],
-      "fill": [70, 200, 100, 255],
-      "outline": [255, 255, 255, 255],
-      "outlineThickness": 2,
-      "renderLayer": 0,
-      "animationSpeed": 0.5
-    }
-  ]
-}
-```
-
-Colors are RGBA arrays with channel values from 0 to 255. `position` and `size` are arrays of two numbers. Value and resource fields contain keys previously registered in `json::ValueRegistry`; common fields use the names `value`, `font`, and `texture`, while controls with multiple textures use names such as `trackTexture` and `knobTexture`. Required widget-specific fields are checked during loading. `loadFile` interprets relative paths from the process's current working directory. See the [JSON module guide](docs/JSON.md) for each widget's required fields and a complete binding example.
-
-To add a custom JSON widget type, implement `json::IJsonWidgetFactory` and register it in a `json::JsonWidgetFactoryRegistry`; the JSON parser does not need to change.
-
-## Typical use without JSON
-
-Create `widgets::` objects with their `Data` structures and factories, transfer the returned `std::unique_ptr` to `UI::addWidget`, forward SFML events to `UI::update`, and draw the interface with `UI::render`.
-
-Fonts and textures are borrowed by widgets and must outlive them. Reference-based widget values must also outlive the widget; `Bar` additionally accepts `std::shared_ptr` values when shared ownership is needed. See each widget's page for its specific requirements.
-
-## Examples
-
-`Example` is the C++-configured showcase. `ExampleJSON` renders the same interface from [`menu.json`](ExampleJSON/menu.json), while C++ binds the live game values and SFML assets by key. The JSON example's widget layout is in `ExampleJSON/menu.json`; game input and button observer behavior remain in C++.
-
-## Widget reference
-
-- [Widget](docs/Widget.md) — abstract base class and factory interface.
-- [Button](docs/Button.md) — rectangle button and observer events.
-- [LabelButton](docs/LabelButton.md) — button with centered text.
-- [SpriteButton](docs/SpriteButton.md) — button drawn with a sprite.
-- [Label](docs/Label.md) — non-interactive text.
-- [Bar](docs/Bar.md) — animated value bar with a fast current-level indicator.
-- [Slider](docs/Slider.md) — horizontal sprite slider bound to a game value.
-- [RadioButton](docs/RadioButton.md) — one choice in a shared selection group.
-- [DropdownList](docs/DropdownList.md) — expandable list of options.
-- [ToggleSwitch](docs/ToggleSwitch.md) — on/off control.
-- [CheckBox](docs/CheckBox.md) — labeled boolean control.
-- [TextInput](docs/TextInput.md) — single-line text input with caret editing.
-- [UI](docs/UI.md) — widget ownership, updates, and render ordering.
+AutoMenu is available under the [MIT license](LICENSE).

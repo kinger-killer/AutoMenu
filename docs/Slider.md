@@ -1,11 +1,14 @@
 # Slider
 
+[Documentation](README.md) / Slider
+
 `Slider<Value>` is a horizontal control with a sprite track and sprite knob. Clicking within its bounds or dragging with the left mouse button writes a value into a variable owned by the game.
 
 ## Create with a factory
 
 ```cpp
-using namespace widgets;
+using namespace AutoMenu;
+using namespace AutoMenu::widgets;
 float volume = 0.5f;
 
 SliderData<float> data(
@@ -20,8 +23,18 @@ SliderFactory<float> factory;
 auto slider = factory.create(data);
 ```
 
+## Ownership and appearance
+
 The bound value and both textures must outlive the slider. The bounds describe the full control area. AutoMenu stretches the track across its width and fits the knob to the bounds' height. Use `setTrackColor` and `setKnobColor` to change sprite tints.
+
+## Input and value range
 
 Values are clamped to the configured range when changed by mouse input. Integral `Value` types are rounded to the nearest integer. If the maximum is not greater than the minimum, mouse input does not change the value and the knob stays at the minimum end. The slider cancels dragging when the window loses focus.
 
 Read the bound variable in game code to use the selected value. The slider does not currently emit a value-changed event.
+
+## See also
+
+- [UI: ownership, updates, and rendering](UI.md)
+- [JSON widget descriptions](JSON.md#widget-descriptions)
+- [All widgets](README.md#widget-reference)

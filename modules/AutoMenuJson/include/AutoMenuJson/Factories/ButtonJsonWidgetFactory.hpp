@@ -2,7 +2,7 @@
 #include <AutoMenuJson/JsonWidgetFactoryHelpers.hpp>
 #include "Widgets/Button.hpp"
 
-namespace json
+namespace AutoMenu::json
 {
 class ButtonJsonWidgetFactory final : public JsonWidgetDetails::BuiltInJsonWidgetFactory<ButtonJsonWidgetFactory>
 {
@@ -16,4 +16,4 @@ public:
 	}
 };
 
-} // namespace json
+} // namespace AutoMenu::json

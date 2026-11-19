@@ -7,7 +7,7 @@
 
 #include "Widget.hpp"
 
-namespace widgets
+namespace AutoMenu::widgets
 {
 class TextInput : public Widget
 {
@@ -275,4 +275,4 @@ public:
 	}
 };
 
-} // namespace widgets
+} // namespace AutoMenu::widgets
